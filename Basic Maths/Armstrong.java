@@ -1,3 +1,8 @@
+// Amrstrong number is a number that is equal to the sum of its own digits each raised to the power of the number of digits.
+/*Example :
+            Input:N = 153   Output:True  */
+                
+
 import java.util.*;
 
 public class Armstrong {
