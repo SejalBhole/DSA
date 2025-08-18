@@ -10,7 +10,7 @@ public class Day4 {
         
         int i = 0, j = 0, k = 0;
 
-        // Traverse both arrays
+ 
         while (i < n && j < m) {
             if (arr1[i] <= arr2[j]) {
                 merged[k++] = arr1[i++];
@@ -38,7 +38,8 @@ public class Day4 {
 
         int[] merged = mergeArrays(arr1, arr2);
 
-        // ✅ Correct printing
+       
         System.out.println("Merged Sorted Array: " + Arrays.toString(merged));
     }
 }
+
