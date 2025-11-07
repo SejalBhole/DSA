@@ -1,0 +1,55 @@
+//Time Complexity : O(2N * K)  
+// N = total candidates,
+// K = average combination length.
+//The pruning condition (if (arr[i] > target) break;) and skipping duplicates make it faster in practice, but asymptotically it remains exponential.
+
+//Space Complexity: O(N) + O(K * 2ⁿ)
+//O(N) - for recursion stack + temp list(ds)
+//O(K * 2ⁿ) - for combinations
+
+
+
+class Solution {
+
+    //main function
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>>ans = new ArrayList<>();
+
+        //SORT THE ARRAY TO AVOID DUPLICATES
+        Arrays.sort(candidates);
+
+        findCombinations(0,candidates,target,ans,new ArrayList<>());
+        return ans;
+    }
+
+
+private void findCombinations(int ind, int[]arr, int target, List<List<Integer>>ans, List<Integer>ds){
+
+    //base case
+    if(target == 0)
+    {
+        ans.add(new ArrayList<>(ds));
+        return;
+    }
+
+
+    for(int i = ind; i<arr.length; i++)
+    {
+        if(i>ind && arr[i] == arr[i-1])    //same elements
+        {
+            continue;                   //skip them
+        }
+
+    if(arr[i] > target) break;
+
+    ds.add(arr[i]);
+
+    findCombinations(i+1, arr, target-arr[i], ans, ds);   
+
+    ds.remove(ds.size()-1);    //remove elements while backtracking
+
+    }
+}
+
+
+}
