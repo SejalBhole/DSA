@@ -1,0 +1,45 @@
+//TC – O(2ⁿ × n) (all partition possibilities + palindrome checks)
+//SC – O(n) (recursion stack + current partition list)
+
+
+
+
+class Solution {
+    public List<List<String>> partition(String s) {
+         List<List<String>> result = new ArrayList<>();
+        backtrack(0, s, new ArrayList<>(), result);
+        return result;
+    }
+
+    private static void backtrack(int start, String s, List<String> currentList, List<List<String>> result) {
+        // Base case: if we reach the end of string, add the current partition
+        if (start == s.length()) {
+            result.add(new ArrayList<>(currentList));
+            return;
+        }
+
+        // Try all possible substrings starting from 'start'
+        for (int end = start; end < s.length(); end++) {
+            if (isPalindrome(s, start, end)) {
+                // Choose the substring
+                currentList.add(s.substring(start, end + 1));
+                // Explore further
+                backtrack(end + 1, s, currentList, result);
+                // Backtrack (undo the choice)
+                currentList.remove(currentList.size() - 1);
+            }
+        }
+    }
+
+    // Helper to check if a substring is palindrome
+    private static boolean isPalindrome(String s, int left, int right) {
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right))
+                return false;
+            left++;
+            right--;
+        }
+        return true;
+    }
+    
+}
