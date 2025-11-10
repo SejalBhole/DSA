@@ -1,0 +1,38 @@
+//TC = O(n × 2ⁿ) -- Subsets → Two choices → 2ⁿ calls × n work per call
+
+//SC = O(n × 2ⁿ) 
+//Auxiliary recursion stack → O(n)  
+//Result list storage → O(n × 2ⁿ) (because all subsets stored)
+
+
+
+
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        
+        List<List<Integer>> result = new ArrayList<>();
+
+        subset(0,nums,new ArrayList<>(),result);
+
+        return result;
+
+    }
+
+
+        public void subset(int ind, int[] nums, List<Integer> temp, List<List<Integer>>result){
+
+            if(ind == nums.length)
+            {
+                result.add(new ArrayList<>(temp));
+                return;     //VERY IMP YOU ALWAYS MISS IT, CAUSE OUT OF BOUND EXCEPTION
+            }
+
+
+            temp.add(nums[ind]);
+            subset(ind+1, nums, temp, result);      //INCLUDE
+            temp.remove(temp.size()-1);
+
+            subset(ind+1, nums, temp, result);      //EXCLUDE
+        }
+    
+}
