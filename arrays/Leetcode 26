@@ -1,0 +1,24 @@
+//TC- O(n)
+//SC- O(1) 
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+
+        // If array has 0 or 1 elements, no duplicates can exist
+        if (nums.length <= 1) return nums.length;
+
+        int slow = 1; // place to write next unique element
+
+        // fast pointer scans through the array
+        for (int fast = 1; fast < nums.length; fast++) {
+            
+            if (nums[fast] != nums[fast - 1])  //not same
+            {
+                nums[slow] = nums[fast]; // write it at slow
+                slow++;                  // move slow forward
+            }
+        }
+
+        return slow; 
+    }
+}
