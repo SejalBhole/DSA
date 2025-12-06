@@ -1,0 +1,31 @@
+//TC - O(n)
+//SC- SC = O(min(n, charset)) -- Set stores unique chars in current window → at most 26 (lowercase) or total ASCII.
+
+
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        HashSet<Character> set = new HashSet<>();
+
+        int left = 0, right = 0;
+        int maxLen = 0;
+
+        while (right < s.length()) {
+            char ch = s.charAt(right);
+
+            // If char exists, shrink window from left
+            while (set.contains(ch)) {
+                set.remove(s.charAt(left));
+                left++;
+            }
+
+            // Add current char and expand window
+            set.add(ch);
+            maxLen = Math.max(maxLen, right - left + 1);
+
+            right++;
+        }
+
+        return maxLen;
+    }
+}
