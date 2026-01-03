@@ -1,0 +1,23 @@
+/*  
+
+x ^ x = 0 → same numbers cancel each other
+x ^ 0 = x
+in XOR order does not matter
+
+ */
+
+
+
+class Solution {
+    public int singleNumber(int[] nums) {
+        
+        int XORed = 0;
+
+        for(int num : nums)
+        {
+            XORed = XORed^num;
+        }
+
+        return XORed;
+    }
+}
